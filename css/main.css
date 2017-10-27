@@ -97,7 +97,18 @@ body {
 p {
   font-size: 16px; 
 }
-
+.line-1{
+    position: relative;
+    top: 50%;  
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.line-1 h1 {
+  font-size: 100px;
+  font-family: 'Roboto Condensed', Helvetica, Helvetica Neue, Arial, sans-serif;
+  font-weight: 900;
+}
 #slide01, #slide03, #slide05 {
   background-color: #FFFFFF; 
 }
@@ -126,7 +137,7 @@ p {
         left: 50%;
         width: 100%;
         height: 100%;
-        background: url(../img/4.jpg) top;
+        background: url(../img/4.jpg) no-repeat top;
         transform: translate(-50%, -50%); 
         background-size:100% auto;
     }
@@ -185,17 +196,25 @@ p {
     /* =Footer */
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     /* =General */
-
+    .slide .wrapper {
+        position: absolute;
+        top: 50%;
+        left: 0%; 
+    }
     /* =Header */
 
     /* =Footer */
 }
 
-@media only screen and (min-width: 1140px) {
+@media only screen and (max-width: 1140px) {
     /* =General */
-
+    .slide .wrapper {
+        position: absolute;
+        top: 50%;
+        left: 30%; 
+    }
     /* =Header */
 
     /* =Footer */
