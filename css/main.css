@@ -74,13 +74,6 @@ html, body {
   margin: 0; 
 }
 
-h1 {
-  font-size: 2em;
-  margin-top: 0;
-  font-family: 'Roboto Condensed', Helvetica, Helvetica Neue, Arial, sans-serif;
-  font-weight: 700; 
-}
-
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
 }
@@ -104,10 +97,13 @@ p {
     margin: 0 auto;
     text-align: center;
 }
-.line-1 h1 {
-  font-size: 100px;
-  font-family: 'Roboto Condensed', Helvetica, Helvetica Neue, Arial, sans-serif;
-  font-weight: 900;
+.header a {
+  font-family: 'Montserrat', sans-serif;
+    font-size: 55px;
+    line-height: 55px;
+    letter-spacing: -1px;
+    color: #ffffff;
+    font-weight: 700;
 }
 #slide01, #slide03, #slide05 {
   background-color: #FFFFFF; 
