@@ -1,47 +1,64 @@
-var path    = require('path');
-var webpack = require('webpack');
-var Clean   = require('clean-webpack-plugin');
-//var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require('webpack');
+const path = require('path');
 
-var jsBuildPath = path.resolve(__dirname, 'build');
-
-var config = {
-  entry: {
-    app: path.resolve(__dirname, './src/app.js'),
-  },
+module.exports = {
+  entry: [ './src/app.js' ],
   output: {
-    publicPath: '/dist/',
-    path: jsBuildPath,
-    filename: '[name].js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      },
-/*      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css-loader!sass-loader!postcss-loader')
-      },*/
-      {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=5120'
+    // Automatically compile when files change.
+    watch: true,
+  // Automatically reload the page when compilation is done.
+  devServer: {
+    inline: true,
+    contentBase: path.join(__dirname, "dist"),
+    compress: false,
+    stats: "errors-only",
+    open: true
+  },
+   // Add sass-loader
+   module: {
+    rules: [ 
+    {
+      test: /\.js$/, loader: "babel-loader", exclude: /node_modules/ 
+    }, {
+      test: /\.(eot|svg|ttf|woff|woff2)$/,
+      include: [
+      path.resolve(__dirname, "assest/fonts")
+      ],
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]?[hash]',
+        outputPath: 'fonts/'
       }
+    }, {
+      test: /\.(jpg|png|svg)$/,
+      include: [
+      path.resolve(__dirname, "src/images")
+      ],
+      use: [
+      'file-loader?name=[name].[ext]?[hash]&outputPath=images/',
+      'image-webpack-loader'
+      ]
+    },
+    {
+      test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,loader: "imports-loader?this=>window"
+    }
     ]
   },
-  resolve: {
-      alias: {
-         mods: path.resolve(__dirname, 'js', 'mods'),
-         css: path.resolve(__dirname, 'css'),
-         pics: path.resolve(__dirname, 'pics'),
-       }
-  },
-  devtool: 'source-map',
-/*  plugins: [
-    new Clean([jsBuildPath]),
-    new ExtractTextPlugin('dist/[name].css')
-  ]*/
-};
-
-module.exports = config;
+  node: {
+      fs: "empty" // avoids error messages
+    },
+    devtool: "source-map",
+    plugins: [
+/*    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      proxy: {
+        target: "http://localhost:3000",
+        ws: true
+      }
+    }),*/
+    ]
+  };
